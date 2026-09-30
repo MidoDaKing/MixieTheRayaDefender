@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://7ggck3ux18ox"]
+
+[ext_resource type="Script" uid="uid://duiqx10r864l" path="res://disintegrating_platforms.gd" id="1_tuyh5"]
+[ext_resource type="Texture2D" uid="uid://buy7qyjamvwa4" path="res://icon.svg" id="2_gw806"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i34iy"]
+size = Vector2(142, 135)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl6mp"]
+size = Vector2(142, 135)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i34iy"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(71, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(71, 1, 1)
+gravity = Vector3(0, 98, 0)
+
+[node name="disintegrating platforms" type="Node2D" unique_id=90201995]
+script = ExtResource("1_tuyh5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1078570017]
+scale = Vector2(1, 0.2)
+texture = ExtResource("2_gw806")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=655010071]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1552572623]
+position = Vector2(0, -22.5)
+shape = SubResource("RectangleShape2D_i34iy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D" unique_id=266287764]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D" unique_id=817702638]
+shape = SubResource("RectangleShape2D_yl6mp")
+
+[node name="Timer" type="Timer" parent="." unique_id=89183743]
+wait_time = 2.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1465781931]
+position = Vector2(-72, 9)
+emitting = false
+amount = 20
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_i34iy")
+
+[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
