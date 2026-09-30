@@ -12,7 +12,7 @@ func test(_delta: float, _new_input: int, _old_input: int) -> String:
 	return "current"
 
 func enter_function(_delta: float, _new_input: int, _old_input: int):
-	body.up_direction = Vector2.UP
+	body.up_direction = Vector2.UP # This will need to be changed when we implement rotating gravity.
 	go_to_wallslide = false
 
 func physics_function(_delta: float, _new_input: int, _old_input: int):
@@ -22,4 +22,6 @@ func physics_function(_delta: float, _new_input: int, _old_input: int):
 	if body.is_near_wall(): go_to_wallslide = true
 
 func exit_function(_delta: float, _new_input: int, _old_input: int):
+	#Set body.velocity to 0, so jumps are consistant
+	#and walking off of something doesn't give us a lot of downward momentum.
 	if not go_to_wallslide: body.velocity.y = 0

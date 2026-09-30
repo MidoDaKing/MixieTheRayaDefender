@@ -1,5 +1,7 @@
 extends PlayerState
 
+## The amount of time that has passed since entering the PlayerState.
+## Used to hold jumps for extra height.
 var timer := 0.0
 
 func test(_delta: float, _new_input: int, _old_input: int) -> String:
@@ -9,9 +11,9 @@ func test(_delta: float, _new_input: int, _old_input: int) -> String:
 
 func enter_function(_delta: float, _new_input: int, _old_input: int):
 	timer = 0.0
-	if _old_input & 0b0100 != 0 or _new_input & 0b0100 != 0:
-		body.velocity -= body.up_direction * body.JUMP_STRENGTH
-	else: body.velocity += body.up_direction * body.JUMP_STRENGTH
+	if _old_input & 0b0100 != 0 or _new_input & 0b0100 != 0: # If down is held, down jump,
+		body.velocity -= body.up_direction * body.JUMP_STRENGTH 
+	else: body.velocity += body.up_direction * body.JUMP_STRENGTH # otherwise normal jump.
 	body.move_and_slide()
 
 func physics_function(_delta: float, _new_input: int, _old_input: int):

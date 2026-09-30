@@ -15,6 +15,8 @@ func enter_function(_delta: float, _new_input: int, _old_input: int):
 	is_finished = false
 
 func idle_function(_delta: float, _old_input: int):
+	## Possibly not the best practice to do the movement in the idle process,
+	## but it looked jittery in the physics process, so...
 	if is_finished: return
 	
 	if rail_follower.progress_ratio == 1: is_finished = true

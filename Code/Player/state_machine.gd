@@ -1,6 +1,6 @@
 extends Node
 
-@export var body: CharacterBody2D
+@export var body: Mixie
 @export var current_state: PlayerState
 var old_inputs: int = 0
 var override := false

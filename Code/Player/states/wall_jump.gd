@@ -6,7 +6,7 @@ var left_original_wall := false
 
 func test(_delta: float, _new_input: int, _old_input: int) -> String:
 	if go_to_wallslide: return "WallSlide"
-	if timer < body.WALL_JUMP_TIME: return "current"
+	if timer < body.WALL_JUMP_TIME and not body.is_on_ceiling(): return "current"
 	return "Fall"
 
 func enter_function(_delta: float, _new_input: int, _old_input: int):
